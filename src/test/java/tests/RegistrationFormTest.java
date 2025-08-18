@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationFormTest {
 
     @BeforeAll
-    static void beforeAll() {
+    static void setEnv() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
@@ -24,7 +24,7 @@ public class RegistrationFormTest {
     }
 
     @AfterAll
-    static void afterAll() {
+    static void closeWebDriver() {
         closeWebDriver();
     }
 
@@ -32,6 +32,9 @@ public class RegistrationFormTest {
     void successfulSearchTest() {
 
         open("/automation-practice-form");
+
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
 
         $("[id=firstName]").setValue("Alexandra"); //заполняем имя
         $("[id=lastName]").setValue("Zabnenkova"); //заполняем фамилию
