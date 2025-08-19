@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormTest {
@@ -20,7 +21,6 @@ public class RegistrationFormTest {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 5000;
     }
 
     @AfterAll
@@ -36,9 +36,9 @@ public class RegistrationFormTest {
         executeJavaScript("$('footer').remove();");
         executeJavaScript("$('#fixedban').remove();");
 
-        $("[id=firstName]").setValue("Alexandra"); //заполняем имя
-        $("[id=lastName]").setValue("Zabnenkova"); //заполняем фамилию
-        $("[id=userEmail]").setValue("novalserg@soap.ru"); //заполняем почту
+        $("#firstName").setValue("Alexandra"); //заполняем имя
+        $("#lastName").setValue("Zabnenkova"); //заполняем фамилию
+        $("#userEmail").setValue("novalserg@soap.ru"); //заполняем почту
         $$("#genterWrapper label").filterBy(text("Female")).first().click(); //выбираем женский пол
         $("#userNumber").setValue("9031234567"); //заполняем телефон
 
@@ -52,8 +52,10 @@ public class RegistrationFormTest {
         $$("#hobbiesWrapper label").filterBy(text("Reading")).first().click();
         $$("#hobbiesWrapper label").filterBy(text("Music")).first().click();
 
-        File pic = new File("src/test/resources/pic.png");
-        $("#uploadPicture").uploadFile(pic);
+      /*  File pic = new File("src/test/resources/pic.png");
+        $("#uploadPicture").uploadFile(pic);*/
+
+        $("#uploadPicture").uploadFromClasspath("pic.png"); //более простой вариант загрузки изображения
 
         $("#currentAddress").setValue("Moscow, NY, UK");
 
@@ -62,8 +64,29 @@ public class RegistrationFormTest {
         $("#city").scrollTo().shouldBe(interactable).click();
         $$("div[class*='-option']").findBy(text("Jaipur")).click();
 
-        $("[id=submit]").click();
+        $("#submit").click();
 
+        //проверка таблицы
+        $(".table-responsive")
+                .$(byText("Student Name")).parent().shouldHave(text("Alexandra Zabnenkova"));
+        $(".table-responsive")
+                .$(byText("Student Email")).parent().shouldHave(text("novalserg@soap.ru"));
+        $(".table-responsive")
+                .$(byText("Gender")).parent().shouldHave(text("Female"));
+        $(".table-responsive")
+                .$(byText("Mobile")).parent().shouldHave(text("9031234567"));
+        $(".table-responsive")
+                .$(byText("Date of Birth")).parent().shouldHave(text("31 December,2000"));
+        $(".table-responsive")
+                .$(byText("Subjects")).parent().shouldHave(text("Physics"));
+        $(".table-responsive")
+                .$(byText("Hobbies")).parent().shouldHave(text("Sports, Reading, Music"));
+        $(".table-responsive")
+                .$(byText("Picture")).parent().shouldHave(text("pic.png"));
+        $(".table-responsive")
+                .$(byText("Address")).parent().shouldHave(text("Moscow, NY, UK"));
+        $(".table-responsive")
+                .$(byText("State and City")).parent().shouldHave(text("Rajasthan Jaipur"));
 
     }
 }
