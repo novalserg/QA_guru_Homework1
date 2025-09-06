@@ -29,10 +29,7 @@ public class RegistrationFormPageObjTest {
 
         RegistrationPage registrationPage = new RegistrationPage();
 
-        open("/automation-practice-form");
-
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+        registrationPage.openPage();
 
         registrationPage
                 .setFirstName("Alexandra")
@@ -65,6 +62,39 @@ public class RegistrationFormPageObjTest {
                 .checkingTableInfo("Hobbies", "Music, Reading, Sports")
                 .checkingTableInfo("Address", "Moscow, NY, UK")
                 .checkingTableInfo("State and City", "Rajasthan Jaipur");
+
+    }
+
+    @Test
+    void requiredFieldsFillTest(){
+
+        RegistrationPage registrationPage = new RegistrationPage();
+        PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
+
+        registrationPage.openPage();
+
+        registrationPage
+                .setFirstName("Alexandra")
+                .setLastName("Zabnenkova")
+                .setEmail("novalserg@soap.ru")
+                .setGender("Female")
+                .setUserNumber("9031234567")
+                .submitButtonClick();
+        practiceFormFillingResultComponent.checkingTableInfo("Student Name", "Alexandra Zabnenkova")
+                .checkingTableInfo("Student Email", "novalserg@soap.ru")
+                .checkingTableInfo("Gender", "Female")
+                .checkingTableInfo("Mobile", "9031234567");
+    }
+
+    @Test
+    void emptyFormTest(){
+
+        RegistrationPage registrationPage = new RegistrationPage();
+
+        registrationPage.openPage();
+
+        registrationPage.submitButtonClick();
+
 
     }
 }
