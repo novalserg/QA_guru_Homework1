@@ -36,28 +36,19 @@ public class RegistrationWithFakerTest {
 
         //test data
 
-        String[] months = {
-                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-        };
-
-        Random random = new Random();
-        int index = random.nextInt(months.length - 1);
-        String randomMonth = months[index];
-
-
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String email = faker.internet().emailAddress();
-        String userGender = "Female";
+        String userGender = faker.options().option();
         String userNumber = faker.number().digits(10);
         String dayOfBirth = String.valueOf(faker.number().numberBetween(1, 30));
+        String monthOfBirth = faker.options().option();
         String yearOfBirth = String.valueOf(faker.number().numberBetween(1930, 2010));
         String currentAddress = faker.address().fullAddress();
-        String subjectPhysicsSelect = "Phy";
+        String subjectSelect = faker.options().option();
         String fileName = "pic.png";
-        String state = "Rajastan";
-        String city = "Jaipur";
+        String state = faker.options().option();
+        String city = faker.options().option();
 
 
         registrationPage.openPage();
@@ -68,8 +59,8 @@ public class RegistrationWithFakerTest {
                 .setEmail(email)
                 .setGender(userGender)
                 .setUserNumber(userNumber)
-                .setDateOfBirth(dayOfBirth, randomMonth, yearOfBirth)
-                .setSubjects(subjectPhysicsSelect)
+                .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
+                .setSubjects(subjectSelect)
                 .setHobbieMusic()
                 .setHobbieReading()
                 .setHobbieSports()
@@ -84,15 +75,15 @@ public class RegistrationWithFakerTest {
         PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
 
         practiceFormFillingResultComponent
-                .checkingTableInfo("Student Name", "Alexandra Zabnenkova")
-                .checkingTableInfo("Student Email", "novalserg@soap.ru")
-                .checkingTableInfo("Gender", "Female")
-                .checkingTableInfo("Mobile", "9031234567")
-                .checkingTableInfo("Date of Birth", "23 August,1955")
-                .checkingTableInfo("Subjects", "Physics")
+                .checkingTableInfo("Student Name", firstName + " " + lastName)
+                .checkingTableInfo("Student Email", email)
+                .checkingTableInfo("Gender", userGender)
+                .checkingTableInfo("Mobile", userNumber)
+                .checkingTableInfo("Date of Birth", dayOfBirth + " " + monthOfBirth +","+yearOfBirth)
+                .checkingTableInfo("Subjects", subjectSelect)
                 .checkingTableInfo("Hobbies", "Music, Reading, Sports")
-                .checkingTableInfo("Address", "Moscow, NY, UK")
-                .checkingTableInfo("State and City", "Rajasthan Jaipur");
+                .checkingTableInfo("Address", currentAddress)
+                .checkingTableInfo("State and City", state + " " + city);
 
     }
 
@@ -103,18 +94,36 @@ public class RegistrationWithFakerTest {
         PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
 
         registrationPage.openPage();
+        Faker faker = new Faker(new Locale("en-GB"));
+
+        //test data
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+        String userGender = faker.options().option();
+        String userNumber = faker.number().digits(10);
+        String dayOfBirth = String.valueOf(faker.number().numberBetween(1, 30));
+        String monthOfBirth = faker.options().option();
+        String yearOfBirth = String.valueOf(faker.number().numberBetween(1930, 2010));
+        String currentAddress = faker.address().fullAddress();
+        String subjectSelect = faker.options().option();
+        String fileName = "pic.png";
+        String state = faker.options().option();
+        String city = faker.options().option();
 
         registrationPage
-                .setFirstName("Alexandra")
-                .setLastName("Zabnenkova")
-                .setEmail("novalserg@soap.ru")
-                .setGender("Female")
-                .setUserNumber("9031234567")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setGender(userGender)
+                .setUserNumber(userNumber)
                 .submitButtonClick();
-        practiceFormFillingResultComponent.checkingTableInfo("Student Name", "Alexandra Zabnenkova")
-                .checkingTableInfo("Student Email", "novalserg@soap.ru")
-                .checkingTableInfo("Gender", "Female")
-                .checkingTableInfo("Mobile", "9031234567");
+
+        practiceFormFillingResultComponent.checkingTableInfo("Student Name", firstName + " " + lastName)
+                .checkingTableInfo("Student Email", email)
+                .checkingTableInfo("Gender", userGender)
+                .checkingTableInfo("Mobile", userNumber);
     }
 
     @Test
