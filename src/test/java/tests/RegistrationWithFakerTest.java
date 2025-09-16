@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
+import static tests.RegistrationFormTest.closeWebDriver;
 
 public class RegistrationWithFakerTest {
 
@@ -31,42 +32,24 @@ public class RegistrationWithFakerTest {
     @Test
     void successfulSearchTest() {
 
-        Faker faker = new Faker(new Locale("en-GB"));
         RegistrationPage registrationPage = new RegistrationPage();
-
-        //test data
-
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String email = faker.internet().emailAddress();
-        String userGender = faker.options().option();
-        String userNumber = faker.number().digits(10);
-        String dayOfBirth = String.valueOf(faker.number().numberBetween(1, 30));
-        String monthOfBirth = faker.options().option();
-        String yearOfBirth = String.valueOf(faker.number().numberBetween(1930, 2010));
-        String currentAddress = faker.address().fullAddress();
-        String subjectSelect = faker.options().option();
-        String fileName = "pic.png";
-        String state = faker.options().option();
-        String city = faker.options().option();
-
-
+        TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
         registrationPage.openPage();
 
         registrationPage
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setGender(userGender)
-                .setUserNumber(userNumber)
-                .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
-                .setSubjects(subjectSelect)
+                .setFirstName(testDataWithFaker.getFirstName())
+                .setLastName(testDataWithFaker.getLastName())
+                .setEmail(testDataWithFaker.getEmail())
+                .setGender(testDataWithFaker.getUserGender())
+                .setUserNumber(testDataWithFaker.getUserNumber())
+                .setDateOfBirth(testDataWithFaker.getDayOfBirth(), testDataWithFaker.getMonthOfBirth(), testDataWithFaker.getYearOfBirth())
+                .setSubjects(testDataWithFaker.getSubjectSelect())
                 .setHobbieMusic()
                 .setHobbieReading()
                 .setHobbieSports()
-                .uploadImage(fileName)
-                .setCurrentAddress(currentAddress)
-                .setStateAndCity(state, city)
+                .uploadImage(testDataWithFaker.getFileName())
+                .setCurrentAddress(testDataWithFaker.getCurrentAddress())
+                .setStateAndCity(testDataWithFaker.getState(), testDataWithFaker.getCity())
                 .submitButtonClick();
 
 
@@ -75,15 +58,15 @@ public class RegistrationWithFakerTest {
         PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
 
         practiceFormFillingResultComponent
-                .checkingTableInfo("Student Name", firstName + " " + lastName)
-                .checkingTableInfo("Student Email", email)
-                .checkingTableInfo("Gender", userGender)
-                .checkingTableInfo("Mobile", userNumber)
-                .checkingTableInfo("Date of Birth", dayOfBirth + " " + monthOfBirth +","+yearOfBirth)
-                .checkingTableInfo("Subjects", subjectSelect)
+                .checkingTableInfo("Student Name", testDataWithFaker.getFirstName() + " " + testDataWithFaker.getLastName())
+                .checkingTableInfo("Student Email", testDataWithFaker.getEmail())
+                .checkingTableInfo("Gender", testDataWithFaker.getUserGender())
+                .checkingTableInfo("Mobile", testDataWithFaker.getUserNumber())
+                .checkingTableInfo("Date of Birth",  testDataWithFaker.getDayOfBirth()+ " " + testDataWithFaker.getMonthOfBirth() +","+testDataWithFaker.getYearOfBirth())
+                .checkingTableInfo("Subjects", testDataWithFaker.getSubjectSelect())
                 .checkingTableInfo("Hobbies", "Music, Reading, Sports")
-                .checkingTableInfo("Address", currentAddress)
-                .checkingTableInfo("State and City", state + " " + city);
+                .checkingTableInfo("Address", testDataWithFaker.getCurrentAddress())
+                .checkingTableInfo("State and City", testDataWithFaker.getState() + " " + testDataWithFaker.getCity());
 
     }
 
@@ -91,39 +74,23 @@ public class RegistrationWithFakerTest {
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
+        TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
         PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
 
         registrationPage.openPage();
-        Faker faker = new Faker(new Locale("en-GB"));
-
-        //test data
-
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String email = faker.internet().emailAddress();
-        String userGender = faker.options().option();
-        String userNumber = faker.number().digits(10);
-        String dayOfBirth = String.valueOf(faker.number().numberBetween(1, 30));
-        String monthOfBirth = faker.options().option();
-        String yearOfBirth = String.valueOf(faker.number().numberBetween(1930, 2010));
-        String currentAddress = faker.address().fullAddress();
-        String subjectSelect = faker.options().option();
-        String fileName = "pic.png";
-        String state = faker.options().option();
-        String city = faker.options().option();
 
         registrationPage
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setGender(userGender)
-                .setUserNumber(userNumber)
+                .setFirstName(testDataWithFaker.getFirstName())
+                .setLastName(testDataWithFaker.getLastName())
+                .setEmail(testDataWithFaker.getEmail())
+                .setGender(testDataWithFaker.getUserGender())
+                .setUserNumber(testDataWithFaker.getUserNumber())
                 .submitButtonClick();
 
-        practiceFormFillingResultComponent.checkingTableInfo("Student Name", firstName + " " + lastName)
-                .checkingTableInfo("Student Email", email)
-                .checkingTableInfo("Gender", userGender)
-                .checkingTableInfo("Mobile", userNumber);
+        practiceFormFillingResultComponent.checkingTableInfo("Student Name", testDataWithFaker.getFirstName() + " " + testDataWithFaker.getLastName())
+                .checkingTableInfo("Student Email", testDataWithFaker.getEmail())
+                .checkingTableInfo("Gender", testDataWithFaker.getUserGender())
+                .checkingTableInfo("Mobile", testDataWithFaker.getUserNumber());
     }
 
     @Test
