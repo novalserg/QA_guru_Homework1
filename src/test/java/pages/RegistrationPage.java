@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import utils.JSUtils;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
@@ -28,12 +29,16 @@ public class RegistrationPage {
 
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    JSUtils jsUtils = new JSUtils();
+
+    public void deleteBanners(){
+        jsUtils.deleteBanners();
+    }
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+        deleteBanners();
 
         return this;
     }
@@ -71,13 +76,6 @@ public class RegistrationPage {
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         calendarInput.click();
         calendarComponent.setDate(day, month, year);
-
-        return this;
-    }
-
-    public RegistrationPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
 
         return this;
     }
