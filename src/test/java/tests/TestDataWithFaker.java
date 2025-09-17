@@ -6,6 +6,8 @@ import java.util.Locale;
 
 public class TestDataWithFaker {
 
+    private static final Faker faker = new Faker(new Locale("en"));
+
     private String firstName;
     private String lastName;
     private String email;
@@ -20,10 +22,8 @@ public class TestDataWithFaker {
     private String state;
     private String city;
 
-    // Конструктор
-    public TestDataWithFaker() {
-        Faker faker = new Faker(new Locale("en"));
 
+    public TestDataWithFaker() {
         this.firstName = faker.name().firstName();
         this.lastName = faker.name().lastName();
         this.email = faker.internet().emailAddress();
@@ -34,14 +34,38 @@ public class TestDataWithFaker {
                 "January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December");
         this.yearOfBirth = String.valueOf(faker.number().numberBetween(1980, 2005));
-        this.subjectSelect = faker.options().option("Math", "Physics", "Chemistry");  // нужно указать варианты
+        this.subjectSelect = faker.options().option("Math", "Physics", "Chemistry");
         this.fileName = "pic.png";
         this.currentAddress = faker.address().fullAddress();
-        this.state = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan"); // пример вариантов
-        this.city = faker.options().option("Delhi", "Lucknow", "Gurgaon", "Jaipur"); // пример вариантов
+
+        this.state = getRandomState();
+        this.city = selectCity(this.state);
+    }
+
+
+    public static String getRandomState() {
+        return faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
+    }
+
+
+    public static String selectCity(String state) {
+        return switch (state) {
+            case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
+            case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Meerut");
+            case "Haryana" -> faker.options().option("Karnal", "Panipat");
+            case "Rajasthan" -> faker.options().option("Jaipur", "Jaisalmer");
+            default -> "Unknown";
+        };
     }
 
     // Геттеры
+    public String getState() {
+        return state;
+    }
+
+    public String getCity() {
+        return city;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -87,16 +111,7 @@ public class TestDataWithFaker {
         return currentAddress;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    // метод для проверки данных
-
+    // main для теста
     public static void main(String[] args) {
         TestDataWithFaker testData = new TestDataWithFaker();
         System.out.println(

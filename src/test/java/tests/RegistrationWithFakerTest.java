@@ -2,20 +2,18 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
-import java.util.Locale;
-import java.util.Random;
-
 import static com.codeborne.selenide.Selenide.*;
 import static tests.RegistrationFormTest.closeWebDriver;
 
 public class RegistrationWithFakerTest {
+
+    TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
 
     @BeforeAll
     static void setEnv() {
@@ -33,7 +31,6 @@ public class RegistrationWithFakerTest {
     void successfulSearchTest() {
 
         RegistrationPage registrationPage = new RegistrationPage();
-        TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
         registrationPage.openPage();
 
         registrationPage
@@ -74,7 +71,6 @@ public class RegistrationWithFakerTest {
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
-        TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
         PracticeFormFillingResultComponent practiceFormFillingResultComponent = new PracticeFormFillingResultComponent();
 
         registrationPage.openPage();
