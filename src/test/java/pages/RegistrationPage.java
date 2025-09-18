@@ -31,15 +31,10 @@ public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
     JSUtils jsUtils = new JSUtils();
 
-    public void deleteBanners(){
-        jsUtils.deleteBanners();
-    }
-
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        deleteBanners();
-
+        jsUtils.deleteBanners();
         return this;
     }
 
