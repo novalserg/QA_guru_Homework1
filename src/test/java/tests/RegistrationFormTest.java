@@ -25,7 +25,7 @@ public class RegistrationFormTest {
 
     @AfterAll
     @Tag("Main test")
-    static void closeWebDriver() {
+    static void closeWB() {
         closeWebDriver();
     }
 

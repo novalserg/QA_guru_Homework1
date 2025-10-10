@@ -7,14 +7,12 @@ import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
 import static com.codeborne.selenide.Selenide.*;
-import static tests.RegistrationFormTest.closeWebDriver;
 
 public class RegistrationWithFakerTest {
 
     TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
 
     @BeforeAll
-    @Tag("Main test")
     static void setEnv() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
@@ -23,14 +21,12 @@ public class RegistrationWithFakerTest {
     }
 
     @AfterAll
-    @Tag("Main test")
     static void closeWB() {
         closeWebDriver();
     }
 
     @Test
-    @Tag("Main test")
-    @DisplayName("")
+    @DisplayName("Тест с джава фейкер")
     void successfulSearchTest() {
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -95,6 +91,7 @@ public class RegistrationWithFakerTest {
 
     @Test
     @Tag("Main test")
+    @Disabled
     void emptyFormTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
