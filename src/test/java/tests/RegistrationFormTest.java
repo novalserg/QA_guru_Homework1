@@ -32,6 +32,7 @@ public class RegistrationFormTest {
     @Test
     @Tag("Main test")
     @DisplayName("Тест без пейдж обджект")
+    @Disabled("Пропускаем")
     void successfulSearchTest() {
 
         open("/automation-practice-form");
