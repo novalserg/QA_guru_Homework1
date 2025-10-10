@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 import pages.components.TextBoxFillingResultsComponent;
@@ -7,6 +8,7 @@ import pages.components.TextBoxFillingResultsComponent;
 public class TextBoxTests {
 
     @Test
+    @Tag("Main test")
     void fillFormTest() {
 
         TextBoxPage textBoxPage = new TextBoxPage();
