@@ -2,10 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
@@ -30,6 +27,7 @@ public class RegistrationFormPageObjTest {
 
     @Test
     @Tag("Main test")
+    @DisplayName("положительный тест с пэйдж обджект")
     void successfulSearchTest() {
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -72,6 +70,7 @@ public class RegistrationFormPageObjTest {
 
     @Test
     @Tag("Main test")
+    @DisplayName("Заполнение обязательных полей")
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -94,6 +93,7 @@ public class RegistrationFormPageObjTest {
 
     @Test
     @Tag("Main test")
+    @DisplayName("Все поля оставляем пустыми")
     void emptyFormTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();

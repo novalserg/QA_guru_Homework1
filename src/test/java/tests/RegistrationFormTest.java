@@ -2,10 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SetValueOptions;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -34,6 +31,7 @@ public class RegistrationFormTest {
 
     @Test
     @Tag("Main test")
+    @DisplayName("Тест без пейдж обджект")
     void successfulSearchTest() {
 
         open("/automation-practice-form");
