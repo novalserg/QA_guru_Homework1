@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationFormPageObjTest {
 
     @BeforeAll
+    @Tag("Main test")
     static void setEnv() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
@@ -22,6 +23,7 @@ public class RegistrationFormPageObjTest {
     }
 
     @AfterAll
+    @Tag("Main test")
     static void closeWB() {
         closeWebDriver();
     }
@@ -69,6 +71,7 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
+    @Tag("Main test")
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -90,6 +93,7 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
+    @Tag("Main test")
     void emptyFormTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();

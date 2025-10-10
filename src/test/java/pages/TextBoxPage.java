@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.components.DeleteBannersComponent;
 
 
 import static com.codeborne.selenide.Condition.*;
@@ -11,7 +10,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class TextBoxPage {
 
     public TextBoxPage openPage() {
-        DeleteBannersComponent deleteBannersComponent = new DeleteBannersComponent();
         open("/text-box");
         mainHeaderText.shouldHave(text("Text Box"));
         executeJavaScript("$('#fixedban').remove()");

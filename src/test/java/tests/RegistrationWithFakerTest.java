@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
@@ -16,18 +17,22 @@ public class RegistrationWithFakerTest {
     TestDataWithFaker testDataWithFaker = new TestDataWithFaker();
 
     @BeforeAll
+    @Tag("Main test")
     static void setEnv() {
-        Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = "1920x1080";
+        Configuration.timeout = 10000;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterAll
+    @Tag("Main test")
     static void closeWB() {
         closeWebDriver();
     }
 
     @Test
+    @Tag("Main test")
     void successfulSearchTest() {
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -68,6 +73,7 @@ public class RegistrationWithFakerTest {
     }
 
     @Test
+    @Tag("Main test")
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -90,6 +96,7 @@ public class RegistrationWithFakerTest {
     }
 
     @Test
+    @Tag("Main test")
     void emptyFormTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
