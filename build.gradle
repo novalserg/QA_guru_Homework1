@@ -1,13 +1,13 @@
 plugins {
     id 'java-library'
-    id 'io.qameta.allure' version '2.28.1'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.28.1"
+def allureVersion = "2.29.1"
 def selenideVersion = "7.9.4"
 
 allure {
