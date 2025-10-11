@@ -2,29 +2,32 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
 import static com.codeborne.selenide.Selenide.*;
-
+@Tag("Main test")
 public class RegistrationFormPageObjTest {
 
     @BeforeAll
+
     static void setEnv() {
-        Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = "1920x1080";
+        Configuration.timeout = 10000;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterAll
+
     static void closeWB() {
         closeWebDriver();
     }
 
     @Test
+
+    @DisplayName("положительный тест с пэйдж обджект")
     void successfulSearchTest() {
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -66,6 +69,8 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
+
+    @DisplayName("Заполнение обязательных полей")
     void requiredFieldsFillTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
@@ -87,6 +92,8 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
+
+    @DisplayName("Все поля оставляем пустыми")
     void emptyFormTest(){
 
         RegistrationPage registrationPage = new RegistrationPage();
