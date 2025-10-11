@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 
-
+@Tag("simple")
 public class RegistrationFormPageObjTest {
 
     @BeforeAll

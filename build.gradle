@@ -48,3 +48,9 @@ tasks.withType(Test) {
         showStandardStreams = true
     }
 }
+
+tasks.register('simple_test', Test) {
+    useJUnitPlatform {
+        includeTags("simple")
+    }
+}
