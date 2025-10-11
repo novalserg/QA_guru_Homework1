@@ -12,6 +12,7 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 
+
 public class RegistrationFormPageObjTest {
 
     @BeforeAll
@@ -44,7 +45,6 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-    @Tag("Main test")
     @DisplayName("положительный тест с пэйдж обджект")
     void successfulSearchTest() {
 
@@ -87,7 +87,6 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-    @Tag("Main test")
     @DisplayName("Заполнение обязательных полей")
     void requiredFieldsFillTest(){
 
@@ -110,7 +109,6 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-    @Tag("Main test")
     @DisplayName("Все поля оставляем пустыми")
     void emptyFormTest(){
 
