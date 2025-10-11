@@ -7,11 +7,10 @@ import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
 import static com.codeborne.selenide.Selenide.*;
-@Tag("Main test")
+
 public class RegistrationFormPageObjTest {
 
     @BeforeAll
-
     static void setEnv() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
@@ -20,13 +19,12 @@ public class RegistrationFormPageObjTest {
     }
 
     @AfterAll
-
     static void closeWB() {
         closeWebDriver();
     }
 
     @Test
-
+    @Tag("Main test")
     @DisplayName("положительный тест с пэйдж обджект")
     void successfulSearchTest() {
 
@@ -69,7 +67,7 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-
+    @Tag("Main test")
     @DisplayName("Заполнение обязательных полей")
     void requiredFieldsFillTest(){
 
@@ -92,7 +90,7 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-
+    @Tag("Main test")
     @DisplayName("Все поля оставляем пустыми")
     void emptyFormTest(){
 
