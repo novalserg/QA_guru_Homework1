@@ -1,6 +1,6 @@
 package tests;
 
-import attach.Attach;
+import helpers.Attach;
 import com.codeborne.selenide.Configuration;
 
 import org.junit.jupiter.api.*;
@@ -17,11 +17,16 @@ public class RegistrationFormPageObjTest {
 
     @BeforeAll
     static void setEnv() {
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = System.getProperty("browserSize");
+        Configuration.browser = System.getProperty("browser");
+        Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        String login = "user1";
+        String password = "1234";
+        String webDriverHost = System.getProperty("webHost");
+        Configuration.remote = "https://"+login+":"+password+"@"+webDriverHost+"/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
