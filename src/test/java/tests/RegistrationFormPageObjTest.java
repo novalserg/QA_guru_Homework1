@@ -17,15 +17,15 @@ public class RegistrationFormPageObjTest {
 
     @BeforeAll
     static void setEnv() {
-        Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.browser = System.getProperty("browser");
-        Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.browserSize = System.getenv("BROWSER_SIZE");
+        Configuration.browser = System.getenv("BROWSER");
+        Configuration.browserVersion = System.getenv("BROWSER_VERSION");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
         String login = "user1";
         String password = "1234";
-        String webDriverHost = System.getProperty("webHost");
+        String webDriverHost = System.getenv("WEB_HOST");
         Configuration.remote = "https://"+login+":"+password+"@"+webDriverHost+"/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
