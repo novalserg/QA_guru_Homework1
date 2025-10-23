@@ -1,9 +1,9 @@
 {
   "base": {
-    "project": "QA_GURU_Homework1",
+    "project": "${JOB_BASE_NAME}",
     "environment": "autotests",
     "comment": "some comment",
-    "reportLink": "",
+    "reportLink": "${BUILD_URL}",
     "language": "en",
     "messenger": "telegram",
     "allureFolder": "build/allure-report/",
