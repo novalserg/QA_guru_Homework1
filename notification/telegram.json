@@ -7,7 +7,6 @@
     "language": "en",
     "messenger": "telegram",
     "allureFolder": "build/allure-results",
-    "summaryFilePath": "/home/jenkins/workspace/37_Zabnenkova_Jenkins_HW_parametrized/allure-report/widgets/summary.json",
     "enableChart": true
   },
   "telegram": {
