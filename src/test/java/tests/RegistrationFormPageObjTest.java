@@ -1,32 +1,55 @@
 package tests;
 
+import helpers.Attach;
 import com.codeborne.selenide.Configuration;
 
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationPage;
 import pages.components.PracticeFormFillingResultComponent;
 
+import java.util.Map;
+
 import static com.codeborne.selenide.Selenide.*;
-@Tag("Main test")
+
+@Tag("simple")
 public class RegistrationFormPageObjTest {
 
     @BeforeAll
-
     static void setEnv() {
+        Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("version", "127");
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        String login = "user1";
+        String password = "1234";
+        String webDriverHost = System.getProperty("webHost", "selenoid.autotests.cloud");
+        Configuration.remote = "https://"+login+":"+password+"@"+webDriverHost+"/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 
     @AfterAll
-
     static void closeWB() {
         closeWebDriver();
     }
 
-    @Test
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
 
+    @Test
     @DisplayName("положительный тест с пэйдж обджект")
     void successfulSearchTest() {
 
@@ -69,7 +92,6 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-
     @DisplayName("Заполнение обязательных полей")
     void requiredFieldsFillTest(){
 
@@ -92,7 +114,6 @@ public class RegistrationFormPageObjTest {
     }
 
     @Test
-
     @DisplayName("Все поля оставляем пустыми")
     void emptyFormTest(){
 

@@ -7,8 +7,15 @@ repositories {
     mavenCentral()
 }
 
+
 def allureVersion = "2.29.1"
 def selenideVersion = "7.9.4"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 allure {
     report {
@@ -40,10 +47,12 @@ tasks.withType(Test) {
         exceptionFormat "full"
         showStandardStreams = true
     }
+
+    systemProperties(System.getProperties())
 }
 
-task simple_test(type: Test) {
+tasks.register('simple_test', Test) {
     useJUnitPlatform {
-        includeTags 'Main test'
+        includeTags("simple")
     }
 }
