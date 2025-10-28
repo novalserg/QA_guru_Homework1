@@ -47,6 +47,8 @@ tasks.withType(Test) {
         exceptionFormat "full"
         showStandardStreams = true
     }
+
+    systemProperties(System.getProperties())
 }
 
 tasks.register('simple_test', Test) {

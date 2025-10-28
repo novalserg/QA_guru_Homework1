@@ -17,9 +17,9 @@ public class RegistrationFormPageObjTest {
 
     @BeforeAll
     static void setEnv() {
-        Configuration.browserSize = System.getProperty("BROWSER_SIZE");
-        Configuration.browser = System.getProperty("BROWSER");
-        Configuration.browserVersion = System.getProperty("BROWSER_VERSION");
+        Configuration.browserSize = System.getProperty("browser_size");
+        Configuration.browser = System.getProperty("browser");
+        Configuration.browserVersion = System.getProperty("browser_version");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
